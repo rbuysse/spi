@@ -1,0 +1,36 @@
+name: Merge
+
+on:
+  push:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Display envvars
+        run: env
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Validate Terraform
+        run: terraform validate
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Display envvars
+        run: env
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Formate Terraform
+        run: terraform fmt -check -diff

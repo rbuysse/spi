@@ -1,0 +1,23 @@
+name: Format Terraform
+
+on:
+  pull_request:
+
+concurrency:
+  group: "${{ github.ref }}-${{ github.workflow }}"
+  cancel-in-progress: true
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Display envvars
+        run: env
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Format Terraform
+        run: terraform fmt -check -diff
