@@ -1,0 +1,5 @@
+.DS_Store
+ssh/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
